@@ -1,0 +1,9 @@
+AcmePay Personal Information Policy
+
+Government-issued identifiers, including Singapore NRIC and FIN numbers, are classified as highly sensitive personal information.
+
+Credit card numbers are classified as highly sensitive financial information.
+
+Email addresses and phone numbers are classified as personal information.
+
+Highly sensitive personal information must not be exposed in application logs.

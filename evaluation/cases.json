@@ -1,0 +1,172 @@
+[
+  {
+    "id": "case_01",
+    "log": "Payment failed for customer S1234567A",
+    "expected_pii": ["NRIC"],
+    "expected_risk": "HIGH",
+    "expected_policy_sources": [
+      "pii_policy.txt",
+      "incident_policy.txt"
+    ],
+    "should_redact": true
+  },
+  {
+    "id": "case_02",
+    "log": "Contact alice@example.com for assistance",
+    "expected_pii": ["EMAIL"],
+    "expected_risk": "MEDIUM",
+    "expected_policy_sources": [
+      "pii_policy.txt",
+      "logging_policy.txt",
+      "incident_policy.txt"
+    ],
+    "should_redact": true
+  },
+  {
+    "id": "case_03",
+    "log": "Application started successfully",
+    "expected_pii": [],
+    "expected_risk": "LOW",
+    "expected_policy_sources": [],
+    "should_redact": false
+  },
+  {
+    "id": "case_04",
+    "log": "User can be reached at +65 9123 4567",
+    "expected_pii": ["PHONE"],
+    "expected_risk": "MEDIUM",
+    "expected_policy_sources": [
+      "pii_policy.txt",
+      "logging_policy.txt",
+      "incident_policy.txt"
+    ],
+    "should_redact": true
+  },
+  {
+    "id": "case_05",
+    "log": "Payment attempted with card 4111 1111 1111 1111",
+    "expected_pii": ["CREDIT_CARD"],
+    "expected_risk": "HIGH",
+    "expected_policy_sources": [
+      "pii_policy.txt",
+      "incident_policy.txt"
+    ],
+    "should_redact": true
+  },
+  {
+    "id": "case_06",
+    "log": "Customer S1234567A can be reached at alice@example.com",
+    "expected_pii": [
+      "NRIC",
+      "EMAIL"
+    ],
+    "expected_risk": "HIGH",
+    "expected_policy_sources": [
+      "pii_policy.txt",
+      "logging_policy.txt",
+      "incident_policy.txt"
+    ],
+    "should_redact": true
+  },
+  {
+    "id": "case_07",
+    "log": "Contact bob@example.com or +65 9876 5432",
+    "expected_pii": [
+      "EMAIL",
+      "PHONE"
+    ],
+    "expected_risk": "MEDIUM",
+    "expected_policy_sources": [
+      "pii_policy.txt",
+      "logging_policy.txt",
+      "incident_policy.txt"
+    ],
+    "should_redact": true
+  },
+  {
+    "id": "case_08",
+    "log": "Customer S1234567A used card 4111 1111 1111 1111",
+    "expected_pii": [
+      "NRIC",
+      "CREDIT_CARD"
+    ],
+    "expected_risk": "HIGH",
+    "expected_policy_sources": [
+      "pii_policy.txt",
+      "incident_policy.txt"
+    ],
+    "should_redact": true
+  },
+  {
+    "id": "case_09",
+    "log": "Transaction ID TXN-928183 completed successfully",
+    "expected_pii": [],
+    "expected_risk": "LOW",
+    "expected_policy_sources": [],
+    "should_redact": false
+  },
+  {
+    "id": "case_10",
+    "log": "Request ID 12345678 completed in 120ms",
+    "expected_pii": [],
+    "expected_risk": "LOW",
+    "expected_policy_sources": [],
+    "should_redact": false
+  },
+  {
+    "id": "case_11",
+    "log": "Customer reference ABC123456789 was created",
+    "expected_pii": [],
+    "expected_risk": "LOW",
+    "expected_policy_sources": [],
+    "should_redact": false
+  },
+  {
+    "id": "case_12",
+    "log": "User email is jane.doe+test@example.org",
+    "expected_pii": ["EMAIL"],
+    "expected_risk": "MEDIUM",
+    "expected_policy_sources": [
+      "pii_policy.txt",
+      "logging_policy.txt",
+      "incident_policy.txt"
+    ],
+    "should_redact": true
+  },
+  {
+    "id": "case_13",
+    "log": "Support callback requested for 8123-4567",
+    "expected_pii": ["PHONE"],
+    "expected_risk": "MEDIUM",
+    "expected_policy_sources": [
+      "pii_policy.txt",
+      "logging_policy.txt",
+      "incident_policy.txt"
+    ],
+    "should_redact": true
+  },
+  {
+    "id": "case_14",
+    "log": "System processed payment metadata successfully",
+    "expected_pii": [],
+    "expected_risk": "LOW",
+    "expected_policy_sources": [],
+    "should_redact": false
+  },
+  {
+    "id": "case_15",
+    "log": "Customer S7654321B contacted support using user@example.com and +65 9000 1234",
+    "expected_pii": [
+      "NRIC",
+      "EMAIL",
+      "PHONE"
+    ],
+    "expected_risk": "HIGH",
+    "expected_policy_sources": [
+      "pii_policy.txt",
+      "logging_policy.txt",
+      "incident_policy.txt"
+    ],
+    "should_redact": true
+  }
+]

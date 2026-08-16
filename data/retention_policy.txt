@@ -1,0 +1,7 @@
+AcmePay Log Retention Policy
+
+Standard application logs may be retained for up to 30 days.
+
+Logs containing highly sensitive personal information must be redacted or removed as soon as the exposure is identified.
+
+Unredacted sensitive information must not remain in long-term log storage.

@@ -1,0 +1,9 @@
+AcmePay Application Logging Policy
+
+Production application logs must not contain highly sensitive personal information.
+
+Sensitive values must be redacted before logs are stored.
+
+Email addresses and phone numbers should only appear in logs when necessary for an approved operational purpose.
+
+Developers should avoid logging unnecessary user information.

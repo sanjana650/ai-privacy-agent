@@ -1,0 +1,22 @@
+AcmePay Privacy Incident Classification Policy
+
+HIGH RISK
+
+An incident must be classified as HIGH risk if the application log contains:
+- Singapore NRIC or FIN identifiers
+- Credit card numbers
+- Other highly sensitive government or financial identifiers
+
+If multiple PII types are present and at least one is HIGH risk, the entire incident is HIGH risk.
+
+MEDIUM RISK
+
+An incident must be classified as MEDIUM risk if the log contains:
+- Email addresses
+- Phone numbers
+
+This classification applies when no HIGH-risk PII is present.
+
+LOW RISK
+
+An incident is LOW risk when no PII is detected.
