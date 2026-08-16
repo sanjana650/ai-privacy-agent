@@ -17,39 +17,38 @@ from app.tools.pii import detect_pii
 from app.tools.remediation import redact_log
 
 
-llm = ChatGroq(
-    model=settings.model_name,
-    api_key=settings.groq_api_key,
-    temperature=0,
-)
+def create_privacy_agent():
+    if not settings.groq_api_key:
+        raise RuntimeError(
+            "GROQ_API_KEY is required to run the privacy agent."
+        )
 
+    llm = ChatGroq(
+        model=settings.model_name,
+        api_key=settings.groq_api_key,
+        temperature=0,
+    )
 
-privacy_agent = create_agent(
-    model=llm,
-    tools=[
-        detect_pii_tool,
-        search_policy_tool,
-        redact_log_tool,
-    ],
-    system_prompt=PRIVACY_AGENT_PROMPT,
-    response_format=ToolStrategy(
-        InvestigationReport
-    ),
-)
+    return create_agent(
+        model=llm,
+        tools=[
+            detect_pii_tool,
+            search_policy_tool,
+            redact_log_tool,
+        ],
+        system_prompt=PRIVACY_AGENT_PROMPT,
+        response_format=ToolStrategy(
+            InvestigationReport
+        ),
+    )
 
 
 def extract_policy_sources(
     messages: list,
 ) -> list[str]:
-    """
-    Extract policy filenames from actual
-    search_policy_tool responses.
-    """
-
     sources: set[str] = set()
 
     for message in messages:
-
         if not isinstance(message, ToolMessage):
             continue
 
@@ -71,6 +70,7 @@ def extract_policy_sources(
 def investigate_log(
     log: str,
 ) -> InvestigationReport:
+    privacy_agent = create_privacy_agent()
 
     result = privacy_agent.invoke(
         {
@@ -90,9 +90,6 @@ def investigate_log(
         "structured_response"
     ]
 
-    # -----------------------------------
-    # Ground PII in deterministic detector
-    # -----------------------------------
     findings = detect_pii(log)
 
     report.pii_detected = [
@@ -100,24 +97,15 @@ def investigate_log(
         for finding in findings
     ]
 
-    # -----------------------------------
-    # Ground policies in actual RAG tool
-    # -----------------------------------
-    report.policy_sources = (
-        extract_policy_sources(
-            result["messages"]
-        )
+    report.policy_sources = extract_policy_sources(
+        result["messages"]
     )
 
-    # -----------------------------------
-    # Ground redaction in deterministic tool
-    # -----------------------------------
     if findings:
         report.redacted_log = redact_log(
             log,
             findings,
         )
-
     else:
         report.redacted_log = log
 
